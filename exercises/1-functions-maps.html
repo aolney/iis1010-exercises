@@ -104,7 +104,8 @@
             id: "encode-definition"
     },
         {
-            block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    ``\nwrite encode('a')",
+            // block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    ``\nwrite encode('a')",
+            block: "switch x\n  ``",
             title: 'Define an encoding using a switch inside a functin',
             id: "encode-definition-switch"
     },
