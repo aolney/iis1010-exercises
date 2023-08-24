@@ -98,36 +98,43 @@
         name: 'Snippets',
         color: 'deeporange',
         blocks: filterblocks([
+          //map version works
+    // {
+    //         // block: "encode = (x)->\n  map = new Map\n  map.set('a','.-')\n  map.get( x )",
+    //         // Same as the above but with comments
+    //         block: "# This is a function\nencode = (x)->\n  # We use a 'map' to store a mapping between letters and Morse\n  map = new Map\n  map.set('a','.-')\n  # After we define the map, we can get whatever matches x from  it\n  map.get( x )\n# Here we write out whatever the function comes back with\nwrite encode('a')",
+    //         title: 'Define an encoding using a map',
+    //         id: "encode-definition"
+    // },
+    //This works, but the switch block can't be added to, so we need to provide 26 positions
     {
-            // block: "encode = (x)->\n  map = new Map\n  map.set('a','.-')\n  map.get( x )",
-            // Same as the above but with comments
-            block: "# This is a function\nencode = (x)->\n  # We use a 'map' to store a mapping between letters and Morse\n  map = new Map\n  map.set('a','.-')\n  # After we define the map, we can get whatever matches x from  it\n  map.get( x )\n# Here we write out whatever the function comes back with\nwrite encode('a')",
-            title: 'Define an encoding using a map',
-            id: "encode-definition"
-    },
-    //This works, but the switch block can't be added to
-    {
-            // block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    \nwrite encode('a')",
-            block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when `` then ``\nwrite encode('a')\n",
+            block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    when '' then ''\n    else '?'\nwrite encode('a')",
             title: 'Define an encoding using a switch inside a function',
             id: "encode-definition-switch"
     },
-    //This appears as quoted text, not code
+    // a when block for switch appears as quoted text, not code
     //     {
     //         block: "when 'a' then '.-'",
     //         title: 'Set switch condition',
     //         id: "set"
     // },
-    {
-            block: "map.set('a','.-')",
-            title: 'Set a letter to a code in a map',
-            id: "set-switch"
-    },
+    // Map version works
+    // {
+    //         block: "map.set('a','.-')",
+    //         title: 'Set a letter to a code in a map',
+    //         id: "set-switch"
+    // },
       {
             block: "write encode('a')",
             title: 'Encode a letter using the encode function and write it out',
             id: "encode"
-    }
+      },
+      {
+            block: "for letter in 'aaaa'\n  write encode(letter)",
+            title: 'Encode a sequence of letters using the encode function and write it out',
+            id: "batch-encode"
+      },
+      
         ])
       }
       ]
