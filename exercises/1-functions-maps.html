@@ -103,10 +103,20 @@
             title: 'Define an encoding using a map',
             id: "encode-definition"
     },
+        {
+            block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\nwrite encode('a')",
+            title: 'Define an encoding using a switch inside a functin',
+            id: "encode-definition-switch"
+    },
+        {
+            block: "    when 'a' then '.-'",
+            title: 'Set switch condition',
+            id: "set"
+    },
     {
             block: "map.set('a','.-')",
             title: 'Set a letter to a code in a map',
-            id: "set"
+            id: "set-switch"
     },
       {
             block: "write encode('a')",
