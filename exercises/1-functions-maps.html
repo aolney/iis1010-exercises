@@ -99,21 +99,25 @@
         color: 'deeporange',
         blocks: filterblocks([
     {
-            block: "encode = (x)->\n  map = new Map\n  map.set('a','.-')\n  map.get( x )",
+            // block: "encode = (x)->\n  map = new Map\n  map.set('a','.-')\n  map.get( x )",
+            // Same as the above but with comments
+            block: "# This is a function\nencode = (x)->\n  # We use a 'map' to store a mapping between letters and Morse\n  map = new Map\n  map.set('a','.-')\n  # After we define the map, we can get whatever matches x from  it\n  map.get( x )\n# Here we write out whatever the function comes back with\nwrite encode('a')",
             title: 'Define an encoding using a map',
             id: "encode-definition"
     },
-        {
-            // block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    ``\nwrite encode('a')",
-            block: "switch x\n  ``",
-            title: 'Define an encoding using a switch inside a functin',
+    //This works, but the switch block can't be added to
+    {
+            // block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    \nwrite encode('a')",
+            block: "encode = (x)->\n  switch x\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when 'a' then '.-'\n    when `` then ``\nwrite encode('a')\n",
+            title: 'Define an encoding using a switch inside a function',
             id: "encode-definition-switch"
     },
-        {
-            block: "when 'a' then '.-'",
-            title: 'Set switch condition',
-            id: "set"
-    },
+    //This appears as quoted text, not code
+    //     {
+    //         block: "when 'a' then '.-'",
+    //         title: 'Set switch condition',
+    //         id: "set"
+    // },
     {
             block: "map.set('a','.-')",
             title: 'Set a letter to a code in a map',
