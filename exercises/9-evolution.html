@@ -408,7 +408,7 @@ PencilCodeGuide.session(
           id: "mutation"
         },
         {
-          block: "(Fitness = (population) -> \n  for i in [0..populationSize]\n    score = 0\n    for j in [0..genomeSize]\n      if population[i].genome[j] is 0\n        score++\n    population[i].fitness = score\nTotalFitness = (population) ->\n  totalFitness = 0\n  for i in [0..populationSize]\n    totalFitness +=  population[i].fitness\n  return totalFitness\nSelect = (population) ->\n  totalFitness = TotalFitness(population)\n  threshold = random totalFitness\n  sum = population[0].fitness\n  index = 0\n  while sum <= threshold and index < populationSize\n    index++\n    sum += population[index].fitness\n  return index\nMateAndReplace = (population,parentA,parentB) ->\n  if population[parentA].fitness > population[parentB].fitness\n    population[parentB].genome = Mutate( population[parentA].genome )\n  else\n    population[parentA].genome = Mutate( population[parentB].genome )\nEvolve = () ->\n  population = (``)\n  generation = 0\n  tick 10, -> \n    Fitness(population)\n    parentA = Select( population )\n    parentB = Select( population )\n    MateAndReplace( population, parentA, parentB )\n    plotLine.moveto generation,TotalFitness(population)\n    ct()\n    write me.genome for me in population\n    generation++\n    if generation > generations\n      tick off)",
+          block: "(Fitness = (population) -> \n  for i in [0..populationSize]\n    score = 0\n    for j in [0..genomeSize]\n      if population[i].genome[j] is 0\n        score++\n    population[i].fitness = score\nTotalFitness = (population) ->\n  totalFitness = 0\n  for i in [0..populationSize]\n    totalFitness +=  population[i].fitness\n  return totalFitness\nSelect = (population) ->\n  totalFitness = TotalFitness(population)\n  threshold = random totalFitness\n  sum = population[0].fitness\n  index = 0\n  while sum <= threshold and index < populationSize\n    index++\n    sum += population[index].fitness\n  return index\nMateAndReplace = (population,parentA,parentB) ->\n  if population[parentA].fitness > population[parentB].fitness\n    population[parentB].genome = Mutate( population[parentA].genome )\n  else\n    population[parentA].genome = Mutate( population[parentB].genome )\nEvolve = () ->\n  population = (``)\n  generation = 0\n  tick 10, -> \n    Fitness(population)\n    parentA = Select( population )\n    parentB = Select( population )\n    MateAndReplace( population, parentA, parentB )\n    plotLine.moveto generation,TotalFitness(population)\n    ct()\n    write me.genome for me in population\n    generation++\n    if generation > generations\n      tick off\nEvolve())",
           title: "evolution main block",
           id: "evolution-main"
         },
@@ -516,7 +516,7 @@ PencilCodeGuide.session(
 <p>Try a few things on your own to make it work:</p>
 <ul>
     <li>Put down the evolution parameters block</li>
-    <li>Write a function `RandomGenome` that returns an array of length `genomeSize` randomly filled with 0 or 1 (see color example)</li>
+    <li>Write a function `RandomGenome` that takes no argument and returns an array of length `genomeSize` randomly filled with 0 or 1 (see color example)</li>
     <li>Put down the `Mutate` block and type in the missing pieces to make it work</li>
     <li>Put down the main block (the last big one) and fill in population to be an array of objects of length `populationSize` with `fitness: 0` and `genome: RandomGenome()` (see people example)</li>
 </ul>
