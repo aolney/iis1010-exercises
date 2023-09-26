@@ -517,8 +517,23 @@ PencilCodeGuide.session(
 <ul>
     <li>Put down the evolution parameters block</li>
     <li>Write a function `RandomGenome` that takes no argument and returns an array of length `genomeSize` randomly filled with 0 or 1 (see color example)</li>
+      <ul>
+        <li>Get a function block, change its name, and remove its argument</li>
+        <li>Get the random color example, change the colors to 0,1 and change the array size to genomeSize</li>
+        <li>Make sure the function returns the array by making it the last line of code (you should not have an equal sign on this line)</li>
+      </ul>
     <li>Put down the `Mutate` block and type in the missing pieces to make it work</li>
+    <ul>
+      <li>Mutate randomly flips a bit. If the bit is 1, it is changed to 0; if it is 0, it is changed to 1</li>
+      <li>Look at the loop in Mutate to decide how to fill in the missing pieces</li>
+      </ul>
     <li>Put down the main block (the last big one) and fill in population to be an array of objects of length `populationSize` with `fitness: 0` and `genome: RandomGenome()` (see people example)</li>
+    <ul>
+      <li>Get the people weight/height example and change to weight/height to fitness/genome</li>
+      <li>Make fitness 0 to start out and genome random, e.g. `fitness: 0` and `genome: RandomGenome()`</li>
+      <li>Finally the make sure the array we're generating is `populationSize` long </li>
+      <li>Make sure your variable is called `population` and not `people`</li>
+    </ul>
 </ul>
 
 <p>When you run you will see the population of genomes and the total fitness in a red line.</p>
