@@ -403,14 +403,24 @@ PencilCodeGuide.session(
           id: "morse-decode-function"
         },
         {
+          block: "PrintFrequencies = ( inputArray ) ->\n  frequencies = {}\n  for symbol in inputArray\n     frequencies[symbol] = (frequencies[symbol] ? 0) + 1;\n  sortedFrequencies = ( {symbol: l, frequency:f} for l,f of frequencies ).sort (a, b) -> b.frequency - a.frequency\n  for tuple in sortedFrequencies\n    write tuple.symbol + ' ' + tuple.frequency",
+          title: "Function to print frequencies of an input array",
+          id: "print-frequencies-function"
+        },
+        {
+          block: "PrintFrequencies(morseText)",
+          title: "Print dictionary of frequencies",
+          id: "printfreq"
+        },
+        {
           block: "(morseDecoded = (Decode letter for letter in morseText))",
           title: "Decode an array of Morse",
           id: "morse-decode-array"
         },
         {
-          block: "PrintFrequencies = ( inputArray ) ->\n  frequencies = {}\n  for symbol in inputArray\n     frequencies[symbol] = (frequencies[symbol] ? 0) + 1;\n  sortedFrequencies = ( {symbol: l, frequency:f} for l,f of frequencies ).sort (a, b) -> b.frequency - a.frequency\n  for tuple in sortedFrequencies\n    write tuple.symbol + ' ' + tuple.frequency",
-          title: "Function to print frequencies of an input array",
-          id: "print-frequencies-function"
+          block: "write morseDecoded",
+          title: "Write out decoded Morse",
+          id: "writemorse"
         }
         // {
         //   block: "(turtle.remove()\nspeed 100\nfoxLine = new Turtle()\nfoxLine.pen red, 1\nhareLine = new Turtle()\nhareLine.pen green, 1)",
