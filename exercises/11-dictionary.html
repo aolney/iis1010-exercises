@@ -472,23 +472,21 @@ PencilCodeGuide.session(
 }
 );
 </script>
-</head><body><h1>Probability Distributions & Code Breaking</h1>
+</head><body><h1>Dictionaries</h1>
 
-<p>Our first class introduced codes by asking you to invent a code using a flashlight, and then we looked at Morse code.</p>
-
-<p>But what if we didn't know Morse code? How could we figure it out from a sample of Morse?</p>
-
-<p>In this exercise, you are given an array of Morse symbols, a partially described `Decode` function, and a function to print on the frequencies of an array.</p>
-
-<p>Fill in the `Decode` function by doing the following:</p>
+<p>Put things into a dictionary by doing the following:</p>
 <ul>
-    <li>Print the frequency distribution of the Morse code sample</li>
-    <li>Compare the Morse frequency distribution to the distribution of English letters below</li>
-    <li>Make a guess about a `Decode` letter (do one at a time), and make the change to the `Decode` function</li>
-    <li>Run the `Decode` function on the Morse sample</li>
-    <li>Move on to the next letter</li>
+    <li>Loop over an array of inputs</li>
+    <li>Use the name of the current array element as the key</li>
+    <li>Set the dictionary value for that key to 1</li>    
 </ul>
 
-<img alt="frequency distribution of letters in English" src="../images/english-letter-freq.jpg" width=500>
+<p>Get frequencies with a dictionary by doing the following:</p>
+<ul>
+    <li>Loop over an array of inputs</li>
+    <li>Use the name of the current array element as the key</li>
+    <li>Set the dictionary value for that key to its current value, plus 1</li> 
+    <li>If the key doesn't exist, make the current value zero</li>   
+</ul>
 
 </body></html>
