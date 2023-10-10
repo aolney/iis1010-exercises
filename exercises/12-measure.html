@@ -403,14 +403,14 @@ PencilCodeGuide.session(
           id: "prunifolium-data"
         },
         {
-          block: "(Mean = (inputArray) ->\n  sum = 0\n  for x in inputArray\n    sum += x\n  return sum/inputArray.length\nStandardDeviation = (mean, inputArray) ->\n  sumSquareDiff = 0\n  for x in inputArray\n    sumSquareDiff += Math.pow(x-mean,2)\n  return Math.sqrt( sumSquareDiff / (inputArray.length - 1 ) )\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\nRand = (m,sd) ->\n  randN = random(normal)\n  return (randN * sd) + m\nGetParameter = ( name, dataSet) ->\n  data = ColumnData( name, dataSet )\n  mean = Mean(data)\n  sd = StandardDeviation(mean,data)\n  parameter = Rand( mean, sd )\n  return parameter)",
+          block: "(Mean = (inputArray) ->\n  sum = 0\n  for x in inputArray\n    sum += x\n  return sum/inputArray.length\nStandardDeviation = (mean, inputArray) ->\n  sumSquareDiff = 0\n  for x in inputArray\n    sumSquareDiff += Math.pow(x-mean,2)\n  return Math.sqrt( sumSquareDiff / (inputArray.length - 1 ) )\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\nRand = (m,sd) ->\n  randN = random(normal)\n  return (randN * sd) + m\nQueryModel = ( name, dataSet) ->\n  data = ColumnData( name, dataSet )\n  mean = Mean(data)\n  sd = StandardDeviation(mean,data)\n  value = Rand( mean, sd )\n  return value)",
           title: "Functions to sample from a data distribution",
           id: "functions-sample"
         },
         {
-          block: "write GetParameter( '', dataSet)",
-          title: "Call GetParameter and write the result to screen",
-          id: "call-getparameter"
+          block: "write QueryModel( '', dataSet)",
+          title: "Call QueryModel and write the result to screen",
+          id: "call-QueryModel"
         },
         {
           block: "(Fern = (length) ->\n  if length>10\n    pen (random color), 1\n    fd length\n    lt 30\n    Fern(length*.7)\n    rt 60\n    Fern(length*.7)\n    lt 30\n    bk length\npen (random color), 1\nspeed 10\nFern(100))",
@@ -418,7 +418,7 @@ PencilCodeGuide.session(
           id: "fern-function"
         },
         {
-          block: "Shrub = (order,dataSet ) ->\n  do ct\n  write 'starting branch ' + order\n  if order > 0 \n    pen (random color), 2\n    branchLength = GetParameter( 'Order' + order + 'Length', dataSet)\n    cumulativeLength = 0\n  \n    lastStretch = branchLength - cumulativeLength\n    fd lastStretch * 3\n    leftAngle = GetParameter( 'Order' + (order-1) + 'Angle', dataSet )\n    lt leftAngle\n    Shrub( order - 1, dataSet )\n    rt leftAngle\n    rightAngle = GetParameter( 'Order' + (order-1) + 'Angle', dataSet )\n    rt rightAngle\n    Shrub( order - 1, dataSet )\n    lt rightAngle\n    bk branchLength * 3\n    write 'finished branch ' + order",
+          block: "Shrub = (order,dataSet ) ->\n  do ct\n  write 'starting branch ' + order\n  if order > 0 \n    pen (random color), 2\n    branchLength = QueryModel( 'Order' + order + 'Length', dataSet)\n    cumulativeLength = 0\n  \n    lastStretch = branchLength - cumulativeLength\n    fd lastStretch * 3\n    leftAngle = QueryModel( 'Order' + (order-1) + 'Angle', dataSet )\n    lt leftAngle\n    Shrub( order - 1, dataSet )\n    rt leftAngle\n    rightAngle = QueryModel( 'Order' + (order-1) + 'Angle', dataSet )\n    rt rightAngle\n    Shrub( order - 1, dataSet )\n    lt rightAngle\n    bk branchLength * 3\n    write 'finished branch ' + order",
           title: "Shrub function",
           id: "shrub-function"
         },
@@ -433,14 +433,9 @@ PencilCodeGuide.session(
           id: "call-shrub-benzoin"
         },
         {
-          block: "(while cumulativeLength < branchLength and order > 1\n      internodeLength = GetParameter( 'Order' + order + 'LengthInternode', dataSet)\n      cumulativeLength += internodeLength\n      pen (random color), 1\n      fd internodeLength * 3\n      angle = GetParameter( 'Order' + (order-1) + 'Angle', dataSet )\n      if random [true,false]\n        lt angle\n        Shrub( order - 1, dataSet )\n        rt angle\n      else\n        rt angle\n        Shrub( order - 1, dataSet )\n        lt angle)",
+          block: "(while cumulativeLength < branchLength and order > 1\n      internodeLength = QueryModel( 'Order' + order + 'LengthInternode', dataSet)\n      cumulativeLength += internodeLength\n      pen (random color), 1\n      fd internodeLength * 3\n      angle = QueryModel( 'Order' + (order-1) + 'Angle', dataSet )\n      if random [true,false]\n        lt angle\n        Shrub( order - 1, dataSet )\n        rt angle\n      else\n        rt angle\n        Shrub( order - 1, dataSet )\n        lt angle)",
           title: "While for shrub function",
           id: "shrub-while"
-        },
-        {
-          block: "(angle = GetParameter( 'Order' + (order-1) + 'Angle', dataSet )\nif random [true,false]\n  lt angle\n  Shrub( order - 1, dataSet )\n  rt angle\nelse\n  rt angle\n  Shrub( order - 1, dataSet )\n  lt angle)",
-          title: "If for shrub function",
-          id: "shrub-if"
         },
         {
           block: "(turtle.jumpto w/4,0\nlabel 'V_Prunifolium', 40\nShrub( 4, V_Prunifolium ))",
@@ -505,21 +500,19 @@ PencilCodeGuide.session(
 
 <p>This is a multi-step exercise. Do the following in order:</p>
 <ul>
-    <li>Get one data block, Mean, StandardDeviation, ColumnData, and GetParameter blocks.</li>
-    <li>Fill in the missing components of the GetParameter block using the other functions.</li>
-    <li>Call GetParameter a couple of times with different variable names.</li>
-    <li>Stop here for discussion.</li>
-    <li>Get and run the Fern block and refamiliarize yourself with how it works.</li>
-    <li>Get the Shrub function, and using the Fern as a guide, fill in the GetParameter blocks.</li>
-    <li>Get the shrub parameter block (speed Infinity) and Shrub run block, and run.</li>
-    <li>Stop here for discussion.</li>
-    <li>Get the while block, put it inside Shrub after `cumulativeLength=0`, change GetParameter, and run it.</li>
-    <li>Stop here for discussion.</li>
-    <li>Get the angle/if block, put it inside the while after `fd internodeLength * 3`, change GetParameter, and run it.</li>
-    <li>Stop here for discussion.</li>
-    <li>Get the second Shrub run block and data block and do an additional Shrub run. You should see the two shrubs side by side.</li>
+  <li>Start with the original Fern block and run it to refresh yourself with how that works</li>
+  <li>Make the basic shrub and run</li>
+    <ul>
+      <li>Data in the L_Benzoin block</li>
+      <li>Basic functions block, with Mean, StandardDeviation, and all the things we just made</li>
+      <li>Shrub block (look at code to see how it is like Fern)</li>
+      <li>Speed infinity block</li>
+      <li>turtle jumpto ... L_Benzoin block (just below speed infinity)</li>
+      <li>Run and see what the plant looks like. It should look a lot like the fractal fern at this stage</li>
+    </ul>
+    <li>Add the while block below the blank block inside the Shrub block</li>
+    <li>Run. Notice how the while block does additional branching at internodes within the main branches</li>
+    <li>Add in V_Prunifolium and compare the branching between the two</li>
   </ul>
-
-<img alt="Strahler branching order" src="../images/strahler.jpg" width=500>
 
 </body></html>
