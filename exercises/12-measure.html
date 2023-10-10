@@ -403,7 +403,7 @@ PencilCodeGuide.session(
           id: "prunifolium-data"
         },
         {
-          block: "(Mean = (inputArray) ->\n  sum = 0\n  for x in inputArray\n    sum += x\n  return sum/inputArray.length\nStandardDeviation = (mean, inputArray) ->\n  sumSquareDiff = 0\n  for x in inputArray\n    sumSquareDiff += Math.pow(x-mean,2)\n  return Math.sqrt( sumSquareDiff / (inputArray.length - 1 ) )\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\nRand = (m,sd) ->\n  randN = random(normal)\n  return (randN * sd) + m\nGetParameter = ( name, dataSet) ->\n  data = f( a, b )\n  mean = f(c)\n  sd = f(d,c)\n  parameter = f( d, e )\n  return parameter)",
+          block: "(Mean = (inputArray) ->\n  sum = 0\n  for x in inputArray\n    sum += x\n  return sum/inputArray.length\nStandardDeviation = (mean, inputArray) ->\n  sumSquareDiff = 0\n  for x in inputArray\n    sumSquareDiff += Math.pow(x-mean,2)\n  return Math.sqrt( sumSquareDiff / (inputArray.length - 1 ) )\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\nRand = (m,sd) ->\n  randN = random(normal)\n  return (randN * sd) + m\nGetParameter = ( name, dataSet) ->\n  data = ColumnData( name, dataSet )\n  mean = Mean(data)\n  sd = StandardDeviation(mean,data)\n  parameter = Rand( mean, sd )\n  return parameter)",
           title: "Functions to sample from a data distribution",
           id: "functions-sample"
         },
