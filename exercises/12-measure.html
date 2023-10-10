@@ -438,7 +438,7 @@ PencilCodeGuide.session(
           id: "shrub-while"
         },
         {
-          block: "(angle = GetParameter( '', dataSet )\nif random [true,false]\n  lt angle\n  Shrub( order - 1, dataSet )\n  rt angle\nelse\n  rt angle\n  Shrub( order - 1, dataSet )\n  lt angle)",
+          block: "(angle = GetParameter( 'Order' + (order-1) + 'Angle', dataSet )\nif random [true,false]\n  lt angle\n  Shrub( order - 1, dataSet )\n  rt angle\nelse\n  rt angle\n  Shrub( order - 1, dataSet )\n  lt angle)",
           title: "If for shrub function",
           id: "shrub-if"
         },
