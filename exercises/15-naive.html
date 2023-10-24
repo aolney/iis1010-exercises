@@ -476,13 +476,33 @@ PencilCodeGuide.session(
 
 <p>We have a huge list of these observations in the `data1` block.</p>
 
+<p><b>Your first step is to move to blocks from snippets, in order, onto the workspace. The blocks have examples for the steps below. Once you understand the examples, I recommend copy/pasting code into a text editor and using find/replace, e.g. replace n0 with n1</b></p>
+
 <p>For a Naive Bayes classifier, we can consider all features to be independent. So all we need to build our classifier is:</p>
 <ul>
-  <li>Get the prior probability of each class (count them up and divide by total; Alive or Dead)</li>
+  <li>Get the prior probability of each class (count them up and divide by total)</li>
+    <ul>
+      <li>Do this for next state alive</li>
+      <li>Do this for next state dead</li>
+    </ul>
   <li>Get the conditional probability each individual feature given a class</li>
   <ul>
     <li>The current status of a cell (True=Alive; False=Dead)</li>
+    <ul>
+      <li>Do this for current state alive, next state dead</li>
+      <li>Do this for current state dead, next state dead</li>
+      <li>Do this for current state alive, next state alive</li>
+      <li>Do this for current state dead, next state alive</li>
+    </ul>
     <li>The number of neighbors of a cell (0 to 8)</li>
+    <ul>
+      <li>Do this for neighbors=0 given next state dead</li>
+      <li>Do this for neighbors=1 given next state dead</li>
+      <li>And so on, up to neighbors=8 given next state dead</li>
+      <li>Do this for neighbors=0 given next state alive</li>
+      <li>Do this for neighbors=1 given next state alive</li>
+      <li>And so on, up to neighbors=8 given next state alive</li>
+    </ul>
   </ul>
 </ul>
 
