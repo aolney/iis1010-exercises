@@ -470,46 +470,58 @@ PencilCodeGuide.session(
 <p>As before, this lab has measurements from the Game of Life:</p>
 <ul>
     <li>The current status of a cell (True=Alive; False=Dead)</li>
-    <li>The next status of a cell</li>
+    <li>The next status of a cell (True=Alive; False=Dead)</li>
     <li>The number of neighbors of a cell (0 to 8)</li>
   </ul>
+
+<b>We want to predict whether a cell will be alive or dead on the next step</b>
 
 <p>We have a huge list of these observations in the `data1` block.</p>
 
 <p><b>Your first step is to move to blocks from snippets, in order, onto the workspace. The blocks have examples for the steps below. Once you understand the examples, I recommend copy/pasting code into a text editor and using find/replace, e.g. replace n0 with n1</b></p>
 
-<p>For a Naive Bayes classifier, we can consider all features to be independent. So all we need to build our classifier is:</p>
+<p>For a Naive Bayes classifier, we can consider all features to be independent. So we need a variable for each of the following features:</p>
 <ul>
-  <li>Get the prior probability of each class (count them up and divide by total)</li>
+  <li>The prior probability of each next state (True=Alive; False=Dead). To get a probability count and divide by total.</li>
     <ul>
-      <li>Do this for next state alive</li>
-      <li>Do this for next state dead</li>
+      <li>Next state alive</li>
+      <li>Next state dead</li>
     </ul>
-  <li>Get the conditional probability each individual feature given a class</li>
+  <li>The conditional probability each individual feature given a class</li>
   <ul>
     <li>The current status of a cell (True=Alive; False=Dead)</li>
     <ul>
-      <li>Do this for current state alive, next state dead</li>
-      <li>Do this for current state dead, next state dead</li>
-      <li>Do this for current state alive, next state alive</li>
-      <li>Do this for current state dead, next state alive</li>
+      <li>Current state alive, next state dead</li>
+      <li>Current state dead, next state dead</li>
+      <li>Current state alive, next state alive</li>
+      <li>Current state dead, next state alive</li>
     </ul>
     <li>The number of neighbors of a cell (0 to 8)</li>
     <ul>
-      <li>Do this for neighbors=0 given next state dead</li>
-      <li>Do this for neighbors=1 given next state dead</li>
+      <li>neighbors=0 given next state dead</li>
+      <li>neighbors=1 given next state dead</li>
       <li>And so on, up to neighbors=8 given next state dead</li>
-      <li>Do this for neighbors=0 given next state alive</li>
-      <li>Do this for neighbors=1 given next state alive</li>
+      <li>neighbors=0 given next state alive</li>
+      <li>neighbors=1 given next state alive</li>
       <li>And so on, up to neighbors=8 given next state alive</li>
     </ul>
   </ul>
 </ul>
 
-<p>Then the probability of a class for a new input is just, for each possible class:</p>
+<b>The next final step takes the above information and applies Naive Bayes.</b>
+
+<p>The probability of a class is just:</p>
 <ul>
   <li>The prior probability of the class</li>
   <li>Times the conditional probabilities of the features in the input given that class</li>
+</ul>
+
+<p>So if we want to predict life/death of the next state, given that we are currently alive and have 3 neighbors, we'd do the following:</p>
+<ul>
+  <li>Calculate P(n=3|next=live)*P(current=live|next=live)*P(next=live)  </li>
+  <li>Calculate P(n=3|next=dead)*P(current=live|next=dead)*P(next=dead) </li>
+  <li>Compare to see which is larger</li>
+  <li>The larger is the most likely class!</li>
 </ul>
 
 <img alt="frequency table for life/death states in Game of Life data" src="../images/table.jpg" width=500>
