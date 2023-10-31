@@ -417,21 +417,21 @@ PencilCodeGuide.session(
           title: "Ex 4 test neighbors",
           id: "test-neighbors"
         },
-        {
-          block: "(write 'Ex 5. Make predictions from KNN model'\nMakeKNNPrediction = (observation,neighbors,predicted) ->\n  knnScores = KNN(observation,neighbors,predicted)\n  observation[predicted] = Average(knnScores)\n  return observation\nsyntheticPredictions = ( MakeKNNPrediction({temp:t},6,'chirps') for t in [0..``] )\ndo cg\nPlot data,'temp','chirps',5,50,0,black\nPlot syntheticPredictions,'temp','chirps',5,50,0,red)",
-          title: "Ex 5 make knn predictions",
-          id: "make-predictions-knn"
-        },
-        {
-          block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript '../scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
-          title: "Ex 6 matrix math regression",
-          id: "matrix-math-regression"
-        },
-        {
-          block: "(write 'Ex 7. Make predictions from matrix math regression model'\nslope = solution.e[0][0].re\nintercept = solution.e[1][0].re\nMakePrediction = (observation) ->\n  observation['chirps'] = slope*observation.temp + intercept\n  return observation\nsyntheticPredictions = ( MakePrediction({temp:t}) for t in [0..100] )\ndo cg\ndo ct\nPlot data,'temp','chirps',5,50,0,black\nPlot syntheticPredictions,'temp','chirps',5,50,0,red\nssError = 0\nfor testObs in test\n  trueChirps = testObs.chirps\n  predChirps = MakePrediction( testObs ).chirps\n  ssError += Math.pow( trueChirps - ``, 2 )\nwrite 'Linear SSError is ' + ssError\nwrite 'KNN SSError is ' + TestAll(test,1,'chirps'))",
-          title: "Ex 7 make matrix math regression predictions",
-          id: "make-predictions-matrix-math"
-        },
+        // {
+        //   block: "(write 'Ex 5. Make predictions from KNN model'\nMakeKNNPrediction = (observation,neighbors,predicted) ->\n  knnScores = KNN(observation,neighbors,predicted)\n  observation[predicted] = Average(knnScores)\n  return observation\nsyntheticPredictions = ( MakeKNNPrediction({temp:t},6,'chirps') for t in [0..``] )\ndo cg\nPlot data,'temp','chirps',5,50,0,black\nPlot syntheticPredictions,'temp','chirps',5,50,0,red)",
+        //   title: "Ex 5 make knn predictions",
+        //   id: "make-predictions-knn"
+        // },
+        // {
+        //   block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript '../scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
+        //   title: "Ex 6 matrix math regression",
+        //   id: "matrix-math-regression"
+        // },
+        // {
+        //   block: "(write 'Ex 7. Make predictions from matrix math regression model'\nslope = solution.e[0][0].re\nintercept = solution.e[1][0].re\nMakePrediction = (observation) ->\n  observation['chirps'] = slope*observation.temp + intercept\n  return observation\nsyntheticPredictions = ( MakePrediction({temp:t}) for t in [0..100] )\ndo cg\ndo ct\nPlot data,'temp','chirps',5,50,0,black\nPlot syntheticPredictions,'temp','chirps',5,50,0,red\nssError = 0\nfor testObs in test\n  trueChirps = testObs.chirps\n  predChirps = MakePrediction( testObs ).chirps\n  ssError += Math.pow( trueChirps - ``, 2 )\nwrite 'Linear SSError is ' + ssError\nwrite 'KNN SSError is ' + TestAll(test,1,'chirps'))",
+        //   title: "Ex 7 make matrix math regression predictions",
+        //   id: "make-predictions-matrix-math"
+        // },
         //--------------------------------------------------------
         // {
         //   block: "(turtle.remove()\nspeed 100\nfoxLine = new Turtle()\nfoxLine.pen red, 1\nhareLine = new Turtle()\nhareLine.pen green, 1)",
