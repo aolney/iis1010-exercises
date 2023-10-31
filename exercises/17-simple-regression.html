@@ -423,7 +423,7 @@ PencilCodeGuide.session(
           id: "make-predictions-knn"
         },
         {
-          block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript '../scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
+          block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript 'https://olney.ai/iis1010-exercises/scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
           title: "Ex 6 matrix math regression",
           id: "matrix-math-regression"
         },
