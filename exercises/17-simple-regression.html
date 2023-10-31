@@ -398,22 +398,22 @@ PencilCodeGuide.session(
           id: "cricket-data"
         },
         {
-          block: "(write 'Ex 1. Randomly split data into train and test sets'\ntrainTestSplit = (random ['train','test'],obs for obs in data)\ntrain = (data[i] for i in [0..data.length-1] when trainTestSplit[i] is ``)\ntest = (data[i] for i in [0..``] when trainTestSplit[i] is 'test'))",
+          block: "(write 'Ex 1. Randomly split data into train and test sets'\ntrainTestSplit = (random ['train','test'],obs for obs in data)\ntrain = (data[i] for i in [0..data.length-1] when trainTestSplit[i] is ``)\ntest = (data[i] for i in [0..``] when trainTestSplit[i] is 'test')write '======'\nwrite 'Split is:' + JSON.stringify(trainTestSplit,Pretty)\nwrite '======'\nwrite 'Train is:' + JSON.stringify(train,Pretty)\nwrite '======'\nwrite 'Test is:' + JSON.stringify(test,Pretty))",
           title: "Ex 1 make train/test sets",
           id: "train-test-sets"
         },
         {
-          block: "(write 'Ex 2. KNN regression'\nKNN = (testObs,neighbors,predicted) ->\n  scores = []\n  for trainObs in train\n    score = 0\n    for k,v of testObs when v isnt predicted\n      score += Math.pow(v-trainObs[k],2)\n    score = Math.sqrt(score)\n    scores.push( {score:score,predicted:trainObs[predicted]} )\n  scores.sort (a, b) -> a.score - b.score\n  return scores[0..neighbors]\nwrite 'Do average'\nAverage = (scores) ->\n  average = ``\n  for s in scores \n    average += s.predicted\n  return `` / scores.length)",
+          block: "(write 'Ex 2. KNN regression'\ndo ct\nwrite 'Find k nearest neighbors'\nKNN = (testObs,neighbors,predicted) ->\n  scores = []\n  for trainObs in train\n    score = 0\n    for k,v of testObs when v isnt predicted\n      score += Math.pow(v-trainObs[k],2)\n    score = Math.sqrt(score)\n    scores.push( {score:score,predicted:trainObs[predicted]} )\n  scores.sort (a, b) -> a.score - b.score\n  return scores[0..neighbors]\nwrite 'Do average'\nAverage = (scores) ->\n  average = 0\n  for s in scores \n    average += s.predicted\n  return average / scores.length)",
           title: "Ex 2 KNN regression and average",
           id: "knn-regression"
         },
         {
-          block: "(write 'Ex 3. Test example'\ntestObs = random test\nresult = KNN(testObs,6,'chirps')\nwrite 'Testing: ' + testObs.chirps\nwrite 'KNN: ' + JSON.stringify(result,Pretty)\nwrite 'Average: ' + Average(result))",
+          block: "(write 'Ex 3. Test example'\ndo ct\ntestObs = random test\nresult = KNN(testObs,6,'chirps')\nwrite '======'\nwrite 'Test target value: ' + testObs.chirps\nwrite '======'\nwrite 'KNN: ' + JSON.stringify(result,Pretty)\nwrite '======'\nwrite 'Average of KNN: ' + Average(result))",
           title: "Ex 3 test example",
           id: "test-example"
         },
         {
-          block: "(write 'Ex 4. Check accuracy for different neighbors'\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]#[-400,-300]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 45\nfor neighbors in [1..50] \n  error = TestAll(test,neighbors,'chirps')\n  turtle.moveto neighbors*20+xOffset,error/10+yOffset\n  label neighbors + ':' + error.toFixed(2))",
+          block: "(write 'Ex 4. Check accuracy for different neighbors'\ndo ct\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]#[-400,-300]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 70\nfor neighbors in [1..50] \n  error = TestAll(test,neighbors,'chirps')\n  turtle.moveto neighbors*20+xOffset,error/10+yOffset\n  label 'k='' + neighbors + ': error=' + error.toFixed(2))",
           title: "Ex 4 test neighbors",
           id: "test-neighbors"
         },
@@ -423,7 +423,7 @@ PencilCodeGuide.session(
           id: "make-predictions-knn"
         },
         {
-          block: "(write 'Ex 6. Matrix math regression'\nawait loadscript 'https://umdrive.memphis.edu/aolney/public/pencilcode/jmat.min.js', defer()\n\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\n\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
+          block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript '../scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
           title: "Ex 6 matrix math regression",
           id: "matrix-math-regression"
         },
@@ -510,13 +510,13 @@ PencilCodeGuide.session(
     <li>Get Ex 5 block.</li>
     <ul>
       <li>Fill in the blank by typing. </li>
-      <li>Run it to test KNN regression over values outside the train/test set.</li>
-      <li>How well is KNN regression doing now?</li>
+      <li>Run it to test KNN regression over values outside the train/test set (you may need to increase the number you typed in)</li>
+      <li>How well is KNN regression doing inside and outside the range of data?</li>
     </ul>
     <li>STOP HERE, WE WILL DISCUSS BEFORE PROCEEDING</li>
     <li>Get Ex 6 block.</li>
     <ul>
-      <li>Notice we are using ColumnData to get values for specific variables. </li>
+      <li>Notice we are using ColumnData to get values for specific variables. Fill in the blanks for y (what we are predicting) and x (the feature we are using to predict) </li>
       <li>We have to make an array of ones for the intercept.</li>
       <li>Finally we use the "Jmat" library to make our matrix of x and ones, invert the matrix, and multiply by y.</li>
       <li>Notice the "re" components of the output written to screen. Which do you think is the slope and which is the intercept?</li>
