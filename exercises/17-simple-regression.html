@@ -413,7 +413,7 @@ PencilCodeGuide.session(
           id: "test-example"
         },
         {
-          block: "(write 'Ex 4. Check accuracy for different neighbors'\ndo ct\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]#[-400,-300]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 70\nfor neighbors in [1..50] \n  error = TestAll(test,neighbors,'chirps')\n  turtle.moveto neighbors*20+xOffset,error/10+yOffset\n  label 'k='' + neighbors + ': error=' + error.toFixed(2))",
+          block: "(write 'Ex 4. Check accuracy for different neighbors'\ndo ct\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]#[-400,-300]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 70\nfor neighbors in [1..50] \n  error = TestAll(test,neighbors,'chirps')\n  turtle.moveto neighbors*20+xOffset,error/10+yOffset\n  label 'k=' + neighbors + ': error=' + error.toFixed(2))",
           title: "Ex 4 test neighbors",
           id: "test-neighbors"
         },
