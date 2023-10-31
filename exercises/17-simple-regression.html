@@ -403,7 +403,7 @@ PencilCodeGuide.session(
           id: "train-test-sets"
         },
         {
-          block: "(write 'Ex 2. KNN regression'\ndo ct\nwrite 'Find k nearest neighbors'\nKNN = (testObs,neighbors,predicted) ->\n  scores = []\n  for trainObs in train\n    score = 0\n    for k,v of testObs when v isnt predicted\n      score += Math.pow(v-trainObs[k],2)\n    score = Math.sqrt(score)\n    scores.push( {score:score,predicted:trainObs[predicted]} )\n  scores.sort (a, b) -> a.score - b.score\n  return scores[0..neighbors]\nwrite 'Do average'\nAverage = (scores) ->\n  average = 0\n  for s in scores \n    average += s.predicted\n  return average / scores.length)",
+          block: "(write 'Ex 2. KNN regression'\ndo ct\nwrite 'Find k nearest neighbors'\nKNN = (testObs,neighbors,predicted) ->\n  scores = []\n  for trainObs in train\n    score = 0\n    for k,v of testObs when v isnt predicted\n      score += Math.pow(v-trainObs[k],2)\n    score = Math.sqrt(score)\n    scores.push( {score:score,predicted:trainObs[predicted]} )\n  scores.sort (a, b) -> a.score - b.score\n  return scores[0..neighbors]\nwrite 'Do average'\nAverage = (scores) ->\n  sum = ``\n  for s in scores \n    sum += s.predicted\n  return `` / scores.length)",
           title: "Ex 2 KNN regression and average",
           id: "knn-regression"
         },
@@ -423,7 +423,7 @@ PencilCodeGuide.session(
           id: "make-predictions-knn"
         },
         {
-          block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript 'https://olney.ai/iis1010-exercises/scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData('chirps',data)\nx = ColumnData('temp',data)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
+          block: "(do cg\ndo ct\nwrite 'Ex 6. Matrix math regression'\nawait loadscript 'https://olney.ai/iis1010-exercises/scripts/jmat.min.js', defer()\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\ny = ColumnData(``,data)\nx = ColumnData('temp',``)\nones = ( 1 for [0..x.length-1])\nm = Jmat.Matrix([x,ones]).transpose()\nminv = Jmat.Matrix.pseudoinverse(m)\nsolution = minv.mul(Jmat.Matrix(y))\nwrite JSON.stringify(solution))",
           title: "Ex 6 matrix math regression",
           id: "matrix-math-regression"
         },
