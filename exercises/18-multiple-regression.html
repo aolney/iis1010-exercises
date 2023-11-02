@@ -423,7 +423,7 @@ PencilCodeGuide.session(
           id: "test-example"
         },
         {
-          block: "(write 'Ex 4. KNN check test data accuracy for different neighbors'\ndo ct\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 45\nfor k in [1..50] \n  error = TestAll(test,k,predicted)\n  turtle.moveto k*20+xOffset,error/10+yOffset\n  label 'k=' + neighbors + ': error=' + error.toFixed(2))",
+          block: "(write 'Ex 4. KNN check test data accuracy for different neighbors'\ndo ct\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 45\nfor k in [1..50] \n  error = TestAll(test,k-l,predicted)\n  turtle.moveto k*20+xOffset,error/10+yOffset\n  label 'k=' + k + ': error=' + error.toFixed(2))",
           title: "Ex 4 test neighbors",
           id: "test-neighbors"
         },
@@ -515,6 +515,7 @@ PencilCodeGuide.session(
    </ul>
     <li>Get Ex 3 block to test KNN regression on a random test item</li>
       <ul>
+        <li>Do you see the bug?</li>
       <li>Run it 5 times to test KNN regression on a random test item.</li>
       <li>What is the largest difference between the true value and the KNN predicted value?</li>
    </ul>
