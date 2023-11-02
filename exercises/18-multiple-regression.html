@@ -408,7 +408,7 @@ PencilCodeGuide.session(
           id: "speaking-data"
         },
         {
-          block: "(write 'Ex 1. Randomly split data into train and test sets'\ntrainTestSplit = (random ['train','test'],obs for obs in data)\ntrain = (data[i] for i in [0..data.length-1] when trainTestSplit[i] is ``)\ntest = (data[i] for i in [0..``] when trainTestSplit[i] is 'test'))",
+          block: "(write 'Ex 1. Randomly split data into train and test sets'\ntrainTestSplit = (random ['train','test'],obs for obs in data)\ntrain = (data[i] for i in [0..data.length-1] when trainTestSplit[i] is ``)\ntest = (data[i] for i in [0..``] when trainTestSplit[i] is 'test')\nwrite '======'\nwrite 'Split is:' + JSON.stringify(trainTestSplit,Pretty)\nwrite '======'\nwrite 'Train is:' + JSON.stringify(train,Pretty)\nwrite '======'\nwrite 'Test is:' + JSON.stringify(test,Pretty))",
           title: "Ex 1 make train/test sets",
           id: "train-test-sets"
         },
@@ -418,27 +418,27 @@ PencilCodeGuide.session(
           id: "knn-regression"
         },
         {
-          block: "(write 'Ex 3. Test example'\ntestObs = random test\nresult = KNN(testObs,neighbors,predicted)\nwrite 'Testing: ' + testObs[predicted]\nwrite 'KNN: ' + JSON.stringify(result,Pretty)\nwrite 'Average: ' + Average(result))",
+          block: "(write 'Ex 3. KNN test example'\ndo ct\ntestObs = random test\nresult = KNN(testObs,neighbors,predicted)\nwrite '======'\nwrite 'Test target value: ' + testObs[predicted]\nwrite '======'\nwrite 'KNN: ' + JSON.stringify(result,Pretty)\nwrite '======'\nwrite 'Average of KNN: ' + Average(result))",
           title: "Ex 3 test example",
           id: "test-example"
         },
         {
-          block: "(write 'Ex 4. Check test data accuracy for different neighbors'\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 45\nfor k in [1..50] \n  error = TestAll(test,k,predicted)\n  turtle.moveto k*20+xOffset,error/10+yOffset\n  label neighbors + ':' + error.toFixed(2))",
+          block: "(write 'Ex 4. KNN check test data accuracy for different neighbors'\ndo ct\nTestAll = (data,neighbors,predicted) ->\n  ssError = 0\n  for testObs in data\n    knnScores = KNN(testObs,neighbors,predicted)\n    average = Average(knnScores)\n    ssError += Math.pow( testObs[predicted] - average, 2 )\n  return ssError\nspeed Infinity\n[xOffset,yOffset] = [-400,0]\nturtle.jumpto xOffset,yOffset\nturtle.pen blue, 1\nlt 45\nfor k in [1..50] \n  error = TestAll(test,k,predicted)\n  turtle.moveto k*20+xOffset,error/10+yOffset\n  label 'k=' + neighbors + ': error=' + error.toFixed(2))",
           title: "Ex 4 test neighbors",
           id: "test-neighbors"
         },
         {
-          block: "(write 'Ex 5. Plot predictions using synthetic test data'\nMakeObservation=(t) ->\n  observation = {}\n  observation[predictor1] = t[0]\n  observation[predictor2] = t[1]\n  return observation\nMakeKNNPrediction = (observation) ->\n  knnScores = KNN(observation,neighbors,predicted)\n  observation[predicted] = Average(knnScores)\n  return observation\nsyntheticValues = []\nsyntheticValues.push [i, j] for i in [-predictor1Max..predictor1Max] for j in [0..1]\nsyntheticPredictions = ( MakeKNNPrediction(MakeObservation(t)) for t in syntheticValues )\n\nPlot data,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,black\nPlot syntheticPredictions,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,red)",
+          block: "(write 'Ex 5. Plot KNN predictions using synthetic test data'\nMakeObservation=(t) ->\n  observation = {}\n  observation[predictor1] = t[0]\n  observation[predictor2] = t[1]\n  return observation\nMakeKNNPrediction = (observation) ->\n  knnScores = KNN(observation,neighbors,predicted)\n  observation[predicted] = Average(knnScores)\n  return observation\nsyntheticValues = []\nsyntheticValues.push [i, j] for i in [-predictor1Max..predictor1Max] for j in [0..1]\nsyntheticPredictions = ( MakeKNNPrediction(MakeObservation(t)) for t in syntheticValues )\n\ndo cg\nPlot data,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,green\nPlot syntheticPredictions,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,red)",
           title: "Ex 5 make knn predictions",
           id: "make-predictions-knn"
         },
         {
-          block: "(write 'Ex 6. Matrix math regression'\nawait loadscript 'https://umdrive.memphis.edu/aolney/public/pencilcode/jmat.min.js', defer()\n\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\n\nMultipleRegression = () ->\n  if not interaction \n    y = ColumnData(predicted,data)\n    x1 = ColumnData(predictor1,data)\n    x2 = ColumnData(``,data)\n    ones = ( 1 for [0..x1.length-1])\n    m = Jmat.Matrix([x1,x2,ones]).transpose()\n    minv = Jmat.Matrix.pseudoinverse(m)\n    solution = minv.mul(Jmat.Matrix(y))\n    return solution\n  else \n    y = ColumnData(predicted,data)\n    x1 = ColumnData(predictor1,data)\n    x2 = ColumnData(predictor2,data)\n    x3 = ( x1[i] * x2[i] for i in [0..x1.length-1] )\n    ones = ( 1 for [0..x1.length-1])\n    m = Jmat.Matrix( null ).transpose()\n    minv = Jmat.Matrix.pseudoinverse(m)\n    solution = minv.mul(Jmat.Matrix(y))\n    return solution\n  \nsolution = MultipleRegression()\nwrite JSON.stringify(solution))",
+          block: "(write 'Ex 6. Multiple linear regression matrix math to train model'\nawait loadscript 'https://olney.ai/iis1010-exercises/scripts/jmat.min.js', defer()\n\nColumnData = (name, dataSet ) ->\n  return (obs[name] for obs in dataSet)\n\nMultipleRegression = () ->\n  if not interaction \n    y = ColumnData(predicted,data)\n    x1 = ColumnData(predictor1,data)\n    x2 = ColumnData(``,data)\n    ones = ( 1 for [0..x1.length-1])\n    m = Jmat.Matrix([x1,x2,ones]).transpose()\n    minv = Jmat.Matrix.pseudoinverse(m)\n    solution = minv.mul(Jmat.Matrix(y))\n    return solution\n  else \n    y = ColumnData(predicted,data)\n    x1 = ColumnData(predictor1,data)\n    x2 = ColumnData(predictor2,data)\n    x3 = ( x1[i] * x2[i] for i in [0..x1.length-1] )\n    ones = ( 1 for [0..x1.length-1])\n    m = Jmat.Matrix( null ).transpose()\n    minv = Jmat.Matrix.pseudoinverse(m)\n    solution = minv.mul(Jmat.Matrix(y))\n    return solution\n  \nsolution = MultipleRegression()\nwrite JSON.stringify(solution))",
           title: "Ex 6 matrix math regression",
           id: "matrix-math-regression"
         },
         {
-          block: "(write 'Ex 7. Make predictions from model'\nMultipleRegressionPrediction = (observation) ->\n  if not interaction \n    slope1 = solution.e[0][0].re\n    slope2 = solution.e[1][0].re\n    intercept = solution.e[2][0].re\n    observation[predicted] = ``*observation[predictor1] + slope2*observation[``]  + intercept\n    return observation\n  else\n    slope1 = solution.e[0][0].re\n    slope2 = solution.e[1][0].re\n    slope3 = solution.e[2][0].re\n    intercept = solution.e[3][0].re\n    observation[predicted] = slope1*observation[null] + slope2*observation[predictor2]  +\n    + slope3*observation[predictor1]*observation[null] + intercept\n    return observation\n  \nsyntheticValues = []\nsyntheticValues.push [i, j] for i in [-predictor1Max..predictor1Max] for j in [0..1]\nsyntheticPredictions = ( MultipleRegressionPrediction(MakeObservation(t)) for t in syntheticValues )\n#do cg\ndo ct\nPlot data,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,black\nPlot syntheticPredictions,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,blue\n\nssError = 0\nfor testObs in test\n  t = testObs[predicted]\n  p = MultipleRegressionPrediction( testObs )[predicted]\n  ssError += Math.pow( t - p, 2 )\nwrite 'Linear SSError is ' + ssError\nwrite 'KNN SSError is ' + TestAll(test,1,predicted))",
+          block: "(write 'Ex 7. Multiple regression make predictions using synthetic test data'\nMultipleRegressionPrediction = (observation) ->\n  if not interaction \n    slope1 = solution.e[0][0].re\n    slope2 = solution.e[1][0].re\n    intercept = solution.e[2][0].re\n    observation[predicted] = ``*observation[predictor1] + slope2*observation[``]  + intercept\n    return observation\n  else\n    slope1 = solution.e[0][0].re\n    slope2 = solution.e[1][0].re\n    slope3 = solution.e[2][0].re\n    intercept = solution.e[3][0].re\n    observation[predicted] = slope1*observation[null] + slope2*observation[predictor2]  +\n    + slope3*observation[predictor1]*observation[null] + intercept\n    return observation\n  \nsyntheticValues = []\nsyntheticValues.push [i, j] for i in [-predictor1Max..predictor1Max] for j in [0..1]\nsyntheticPredictions = ( MultipleRegressionPrediction(MakeObservation(t)) for t in syntheticValues )\n#do cg\ndo ct\nPlot data,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,black\nPlot syntheticPredictions,predictor1,predicted,scaleX,scaleY,offsetX,offsetY,blue\n\nssError = 0\nfor testObs in test\n  t = testObs[predicted]\n  p = MultipleRegressionPrediction( testObs )[predicted]\n  ssError += Math.pow( t - p, 2 )\nwrite 'Linear SSError is ' + ssError\nwrite 'KNN SSError is ' + TestAll(test,1,predicted))",
           title: "Ex 7 make matrix math regression predictions",
           id: "make-predictions-matrix-math"
         },
@@ -488,50 +488,58 @@ PencilCodeGuide.session(
 }
 );
 </script>
-</head><body><h1>Regression</h1>
+</head><body><h1>Multiple Regression</h1>
 
 <p>We'll use TWO new datasets, Grade and Speaking.
   The images below depicts multiple regression for these studies.
   For Grade, we will do multiple regression, and for Speaking, we will do multiple regression with an interaction.
   </p>
 
-<p>Do the following in order for the Grade dataset. Some of these repeat last week :)</p>
+<p>Do the following in order for the Grade dataset. Some of these repeat the last class :)</p>
 <ul>
     <li>Get utility functions and Grade data/configuration block.</li>
-    <li>Get Ex 1 block.</li>
+    <ul>
+      <li>What are the predictors?</li>
+      <li>What are we predicting?</li>
+      <li>How many neighbors for KNN?</li>
+    </ul>
+    <li>Get Ex 1 block to split the data into train/test sets</li>
     <ul>
       <li>Fill in the two blanks by typing.</li>
       <li>Just like last time, this will do a random split, approximately 50/50.</li>
+      <li>Take a look at the output which shows the split.</li>
    </ul>
-    <li>Get Ex 2 block.</li>
+    <li>Get Ex 2 block to do KNN and average the results</li>
     <ul>
       <li>Fill in the two blanks in the "Average" function by typing.</li>
    </ul>
-    <li>Get Ex 3 block.</li>
+    <li>Get Ex 3 block to test KNN regression on a random test item</li>
       <ul>
       <li>Run it 5 times to test KNN regression on a random test item.</li>
+      <li>What is the largest difference between the true value and the KNN predicted value?</li>
    </ul>
-    <li>Get Ex 4 block.</li>
+    <li>Get Ex 4 block to test KNN regression on the whole test set for various k.</li>
     <ul>
       <li>Run it 10 times to test KNN regression over the whole test set, and keep track of best K for the test set.</li>
-      <li>What happens when K increases?</li>
+      <li>What is the best value for k?</li>
     </ul>
-    <li>Get Ex 5 block.</li>
+    <li>Get Ex 5 block to test KNN regression on values both inside and outside the train/test set.</li>
     <ul>
       <li>Run it to test KNN regression over values outside the train/test set.</li>
+      <li>Repeat a few times to see how KNN regression does over different splits of the data.</li>
       <li>How well is KNN regression doing now?</li>
     </ul>
-    <li>Get Ex 6 block.</li>
+    <li>Get Ex 6 block to use multiple linear regression on the same data.</li>
     <ul>
       <li>Fill in the blank predictor name </li>
       <li>Notice this is the same as simple linear regression but we made an extra column for the new variable</li>
       <li>As before, we use the "Jmat" library to make our matrix, invert the matrix, and multiply by y.</li>
       <li>Look at the "re" components of the output written to screen. Which do you think are the two slopes and which is the intercept?</li>
     </ul>
-    <li>Get Ex 7 block.</li>
+    <li>Get Ex 7 block to test multiple linear regression on values both inside and outside the train/test set</li>
     <ul>
-      <li>Fill in the two blanks by typing. </li>
-      <li>Run it to test multiple linear regression over values outside the train/test set.</li>
+      <li>Fill in the four blanks by typing (use the context as clues). </li>
+      <li>Run multiple times to test multiple linear regression over values outside the train/test set. Why doesn't it change?</li>
       <li>How does the behavior of the linear regression model compare to the KNN regression?</li>
     </ul>
     <li>STOP HERE FOR DISCUSSION</li>
