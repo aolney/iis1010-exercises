@@ -393,7 +393,7 @@ PencilCodeGuide.session(
       color: 'deeporange',
       blocks: filterblocks([
         {
-          block: "(write 'Ex 1. Get Data'\nnotData = [{'Input':[1,1],'Class':0},{'Input':[0,1],'Class':1}]\nandData = [{'Input':[1,1,1],'Class':1},{'Input':[0,1,1],'Class':0},{'Input':[1,0,1],'Class':0},{'Input':[0,0,1],'Class':0}]\norData = [{'Input':[1,1,1],'Class':1},{'Input':[0,1,1],'Class':1},{'Input':[1,0,1],'Class':1},{'Input':[0,0,1],'Class':0}]\n\nPretty = (key, val) ->\n  if isNaN(val)\n    return val\n  else\n    return val.toFixed(2)\n    \nMakePrediction = ( weights, inputs ) ->\n  sum = 0\n  for i in [ 0 .. weights.length - 1 ]\n    sum += weights[i] * inputs[``]\n  if sum > 0\n    return 1\n  else\n    return 0\n\nLearnPerceptron = (data,size) ->\n  weights = ( random(normal) for [0..size] )\n  write 'Initial weights: ' + JSON.stringify(weights,Pretty)\n  errors = 1\n  while errors > 0\n    errors = 0\n    for obs in data\n      prediction = MakePrediction( weights, obs.Input )\n      for i in [0 .. weights.length - 1]\n        weights[i] += .01 * ( obs.Class - `` ) * obs.Input[i]\n      errors += Math.abs( obs.Class - prediction )\n      write 'Predicted: ' + prediction + ' for ' + JSON.stringify(obs)\n      write 'Weights: ' + JSON.stringify(weights,Pretty)\n  write 'Final weights: ' + JSON.stringify(weights,Pretty)\n  return weights)",
+          block: "(write 'Ex 1. Get Data'\nnotData = [{'Input':[1,1],'Class':0},{'Input':[0,1],'Class':1}]\nandData = [{'Input':[1,1,1],'Class':1},{'Input':[0,1,1],'Class':0},{'Input':[1,0,1],'Class':0},{'Input':[0,0,1],'Class':0}]\norData = [{'Input':[1,1,1],'Class':1},{'Input':[0,1,1],'Class':1},{'Input':[1,0,1],'Class':1},{'Input':[0,0,1],'Class':0}]\n\nPretty = (key, val) ->\n  if isNaN(val)\n    return val\n  else\n    return val.toFixed(2)\n    \nMakePrediction = ( weights, inputs ) ->\n  sum = 0\n  for i in [ 0 .. weights.length - 1 ]\n    sum += weights[i] * inputs[``]\n  if sum > 0\n    return 1\n  else\n    return 0\n\nLearnPerceptron = (data,size) ->\n  weights = ( random(normal) for [0..size] )\n  write 'Initial weights: ' + JSON.stringify(weights,Pretty)\n  iteration = 0\n  errors = 1\n  while errors > 0\n    iteration++\n    write '-------- Iteration ' + iteration + ' ---------'\n    errors = 0\n    for obs in data\n      prediction = MakePrediction( weights, obs.Input )\n      for i in [0 .. weights.length - 1]\n        weights[i] += .01 * ( obs.Class - `` ) * obs.Input[i]\n      errors += Math.abs( obs.Class - prediction )\n      write 'Predicted: ' + prediction + ' for ' + JSON.stringify(obs)\n      write 'Weights: ' + JSON.stringify(weights,Pretty)\n  write 'Final weights: ' + JSON.stringify(weights,Pretty)\n  return weights)",          
           title: "Ex 1. Perceptron logic data and learning algorithm",
           id: "perceptron-block"
         },
@@ -468,14 +468,14 @@ PencilCodeGuide.session(
 <ul>
     <li>Get Ex 1 block</li>
     <ul>
-      <li>Find the two blanks.</li>
+      <li>Find the two blanks (one is in MakePrediction and the other is in LearnPerceptron</li>
       <li> See if you can fill them in by looking for clues in the code and using what we talked about in class.</li>
     </ul>
     <li>Get Ex 2 block</li>
     <ul>
       <li>Learn the AND function.</li>
       <li>Look at how many items it got right at the beginning and how many it got right as the end</li>
-      <li>Repeat 3 times. Notice that the number of iterations to learn changes based on the random initialization of weights (scroll down to see).</li>
+      <li>Repeat 3 times. What are the final weights each time? How many iterations does it take to learn each time? Why does this vary?</li>
       <li>Repeat the above steps for OR and NOT</li>
     </ul>
     <li>STOP FOR DISCUSSION</li>
