@@ -408,7 +408,7 @@ PencilCodeGuide.session(
           id: "ex3-link"
         },
         {
-          block: "(ex4_link = 'https://developers.google.com/machine-learning/crash-course/playground/?utm_source=engedu&utm_medium=ss&utm_campaign=mlcc&hl=en#activation=relu&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.1&regularizationRate=0.01&noise=80&networkShape=3,2&seed=0.38953&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=true&problem_hide=true&tutorial=dp-neural-net-intro-spiral&goalTestLossMinThresholdFirst=0.4&goalTestLossMinThresholdSecond=0.25')",
+          block: "(ex4_link = 'https://developers.google.com/machine-learning/crash-course/playground/?utm_source=engedu&utm_medium=ss&utm_campaign=mlcc&hl=en#activation=relu&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.1&regularizationRate=0.01&noise=40&networkShape=3,2&seed=0.38953&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=true&problem_hide=true&tutorial=dp-neural-net-intro-spiral&goalTestLossMinThresholdFirst=0.4&goalTestLossMinThresholdSecond=0.25')",
           title: "Ex 4 link",
           id: "ex4-link"
         },
@@ -523,12 +523,14 @@ PencilCodeGuide.session(
 
 <p>Do the following in order:</p>
 <ul>
+    <li>Exercise 1: Linear separation and learning rate</li>
     <li>In Pencil Code, run the LaunchTensorFlow function with the Ex 1 link </li>
     <li>In the playground, do the following:</li>
     <ul>
-      <li>Train the network, one step at a time. Notice the Learning rate menu at the top-right of Playground. The given Learning rate-3-is very high. Observe how that high Learning rate affects your model by clicking the "Step" button 10 or 20 times. After each early iteration, notice how the model visualization changes dramatically. You might even see some instability after the model appears to have converged. Also notice the lines running from x1 and x2 to the model visualization. The weights of these lines indicate the weights of those features in the model. That is, a thick line indicates a high weight.</li>
+      <li>Train the network, one step at a time. Notice the Learning rate menu at the top-right of Playground. The given Learning rate-3-is very high. Observe how that high Learning rate affects your model by clicking the "Step" button 10 or 20 times. After each early iteration, notice how the model visualization changes dramatically. You might even see some instability after the model appears to have converged. Also notice the lines running from x1 and x2 to the model visualization. The weights of these lines indicate the weights of those features in the model. That is, a thick line indicates a high weight. Hover over them to see the weight values. Notice the region colors of the output match the color of the datapoints within them (mostly). This shows the network has learned what we want.</li>
       <li>Next, press the Reset button, lower the learning rate, and repeat the above steps. How did the lower learning rate impact convergence? Examine both the number of steps needed for the model to converge, and also how smoothly and steadily the model converges. Experiment with even lower values of learning rate. Can you find a learning rate too slow to be useful?  </li>
     </ul>
+    <li>Exercise 2: Linear inseparability and hidden layers </li>
     <li>STOP HERE FOR DISCUSSION</li>
     <li>In Pencil Code, run the LaunchTensorFlow function with the Ex 2 link </li>
     <li>In the playground, do the following:</li>
@@ -538,6 +540,7 @@ PencilCodeGuide.session(
       <li>Continue experimenting by adding or removing hidden layers and neurons per layer. Also feel free to change learning rates, regularization, and other learning settings. What is the smallest number of nodes and layers you can use that gives test loss of 0.177 or lower?</li>
     </ul>
     <li>STOP HERE FOR DISCUSSION</li>
+    <li>Exercise 3: Nested spirals</li>
     <li>In Pencil Code, run the LaunchTensorFlow function with the Ex 3 link </li>
     <li>In the playground, do the following:</li>
     <ul>
@@ -545,6 +548,7 @@ PencilCodeGuide.session(
       <li>Even with Neural Nets, some amount of feature engineering is often needed to achieve best performance. Try adding in additional cross product features or other transformations like sin(X1) and sin(X2). Do you get a better model? Is the model output surface any smoother?</li>
     </ul>
     <li>STOP HERE FOR DISCUSSION</li>
+    <li>Exercise 4: Noisy bullseye</li>
     <li>In Pencil Code, run the LaunchTensorFlow function with the Ex 4 link </li>
     <li>In the playground, do the following (this repeats the last exercise with a new dataset):</li>
     <ul>
