@@ -403,7 +403,7 @@ PencilCodeGuide.session(
           id: "term-doc-matrix"
         },
         {
-          block: "(write 'Ex 2. Query the term document matrix'\nCosine = (v1,v2,range) ->\n  dotproduct = ``\n  v1norm = 0\n  v2norm = 0\n  for i in range\n    if v1[i]? and v2[i]?\n      dotproduct += v1[i] * v2[i]\n    if v1[i]?\n      v1norm += v1[i] * v1[i]\n    if v2[i]?\n      v2norm += v2[i] * v2[i]\n  return dotproduct / (Math.sqrt(v1norm) * Math.sqrt(v2norm))\nDoWordQueries = () ->\n  range = [0..docCount]\n  write 'Cosine of MAY and GOOD ' + Cosine(termDocumentMatrix['MAY'],termDocumentMatrix['GOOD'],range)\n  write 'Cosine of THANK and GOOD ' + Cosine(termDocumentMatrix['THANK'],termDocumentMatrix['GOOD'],range)\n  write 'Cosine of GOAT and HOUSE ' + Cosine(termDocumentMatrix['GOAT'],termDocumentMatrix['HOUSE'],range)\n  write 'Cosine of A and DARK ' + Cosine(termDocumentMatrix['A'],termDocumentMatrix['DARK'],range)\nDoWordQueries())",
+          block: "(write 'Ex 2. Query the term document matrix'\ndo ct\nCosine = (v1,v2,range) ->\n  dotproduct = ``\n  v1norm = 0\n  v2norm = 0\n  for i in range\n    if v1[i]? and v2[i]?\n      dotproduct += v1[i] * v2[i]\n    if v1[i]?\n      v1norm += v1[i] * v1[i]\n    if v2[i]?\n      v2norm += v2[i] * v2[i]\n  return dotproduct / (Math.sqrt(v1norm) * Math.sqrt(v2norm))\nDoWordQueries = () ->\n  range = [0..docCount]\n  write 'MAY ' + JSON.stringify(termDocumentMatrix['MAY'],null,2)\n  write 'GOOD ' + JSON.stringify(termDocumentMatrix['GOOD'],null,2)\n  write 'Cosine of MAY and GOOD: ' + Cosine(termDocumentMatrix['MAY'],termDocumentMatrix['GOOD'],range)\n  write '------'\n  write 'THANK ' + JSON.stringify(termDocumentMatrix[``],null,2)\n  write 'GOOD ' + JSON.stringify(termDocumentMatrix['GOOD'],null,2)\n  write 'Cosine of THANK and GOOD: ' + Cosine(termDocumentMatrix['THANK'],termDocumentMatrix[``],range)\n  write '------'\n  write 'GOAT ' + JSON.stringify(termDocumentMatrix['GOAT'],null,2)\n  write 'HOUSE ' + JSON.stringify(termDocumentMatrix['HOUSE'],null,2)\n  write 'Cosine of GOAT and HOUSE: ' + Cosine(termDocumentMatrix['GOAT'],termDocumentMatrix['HOUSE'],range)\n  write '------'\n  write 'A ' + JSON.stringify(termDocumentMatrix['A'],null,2)\n  write 'DARK ' + JSON.stringify(termDocumentMatrix['DARK'],null,2)\n  write 'Cosine of A and DARK: ' + Cosine(termDocumentMatrix['A'],termDocumentMatrix['DARK'],range)\nDoWordQueries())",
           title: "Ex 2 Query term document matrix",
           id: "query-termdoc"
         },
@@ -418,7 +418,7 @@ PencilCodeGuide.session(
           id: "document-search"
         },
         {
-          block: "(write 'Ex 5. Run Word2Vec'\nex5_link = 'https://umdrive.memphis.edu/aolney/public/pencilcode/word2vec/index.html'\nLaunchLink = (link) ->\n  $('<iframe src=' + link + ' width=900px height=1000px></iframe>').appendTo('body');\nLaunchLink( ex5_link ))",
+          block: "(write 'Ex 5. Run Word2Vec'\nex5_link = 'https://olney.ai/iis1010-exercises/word2vec/index.html'\nLaunchLink = (link) ->\n  $('<iframe src=' + link + ' width=900px height=1000px></iframe>').appendTo('body');\nLaunchLink( ex5_link ))",
           title: "Ex 5 word2vec",
           id: "word2vec"
         },
@@ -483,9 +483,10 @@ PencilCodeGuide.session(
     </ul>
     <li>Get Ex 2 block. This block calculates similarity between vectors in the term-document matrix</li>
     <ul>
-      <li>Fill in the blank. Hint: we are doing a sum.</li>
-      <li>Run the program to compare the similarity of words. Scroll all the way down. Notice that word pairs have cosines of 0, 1, and values in between.</li>
-      <li>Find the vectors for each word pair by scrolling up. What can you say about the pairs that have a cosine of 0 or 1?</li>
+      <li>Fill in the blank in Cosine. Hint: we are doing a sum.</li>
+      <li>Fill in the blanks in DoWordQueries. Hint: look at the context.</li>
+      <li>Run the program to compare the similarity of words. Notice that word pairs have cosines of 0, 1, and values in between.</li>
+      <li>Look at the vectors for each word pair. What can you say about the pairs that have a cosine of 0 or 1?</li>
     </ul>
     <li>Get Ex 3 block</li>
     <ul>
