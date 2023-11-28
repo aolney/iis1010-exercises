@@ -505,8 +505,8 @@ PencilCodeGuide.session(
     <li>Get Ex 5 block. This block gets a sequence of next words given a starting word.</li>
     <ul>
       <li>Fill in the blanks for GetNextWordMax and GetNextWordRandom; both have blanks in their return values. What should each be returning (think of the name of the function).</li>
-      <li>Fill in the blank "f" in GetNextWords with GetNextWordMax.</li>
-      <li>Fill in the blank for the starting word when you call "GetNextWords"</li>
+      <li>Fill in the blank "f" in GetWords with GetNextWordMax.</li>
+      <li>Fill in the blank for the starting word when you call "GetWords"</li>
       <li>Run it! Look at the probability for the next word (long row). Notice that it is always choosing the max. That must be good, right? Scroll to the bottom and look at the words output. Notice that it's repeating the same words over and over. Max is like giving everything else zero probability. No generalizability!</li>
     <li>Switch the previous "f" in GetNextWords to GetNextWordRandom.</li>
     <li>Run it and look at the output. Now we are choosing low probability words sometimes. Scroll down and look at the words output. Notice that it's not very grammatical. Looks like giving 1 to unseen bigrams might be too much (overgeneraliztion)!</li>
